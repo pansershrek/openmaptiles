@@ -3,25 +3,29 @@ layer:
   description: |
       Fountain
   fields:
-    name: The OSM [`name`](http://wiki.openstreetmap.org/wiki/Key:name) value of the water body.
-    name_en: English name `name:en` if available, otherwise `name`.
-    name_de: German name `name:de` if available, otherwise `name` or `name:en`.
     class:
       description: |
-          Fountain
+          All water polygons from [OpenStreetMapData](http://osmdata.openstreetmap.de/) have the class `ocean`.
+          Water bodies are classified as `lake` or `river` for water bodies with the [`waterway`](http://wiki.openstreetmap.org/wiki/Key:waterway) tag.
       values:
-      - lake
+        lake:
+          waterway: ['', 'lake']
+        dock:
+          waterway: 'dock'
+        river:
+        ocean:
     intermittent:
       description: |
-        Mark with `1` if it is an [intermittent](http://wiki.openstreetmap.org/wiki/Key:intermittent) lake.
+        Mark with `1` if it is an [intermittent](http://wiki.openstreetmap.org/wiki/Key:intermittent) water polygon.
       values: [0, 1]
-  buffer_size: 256
-  srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    brunnel:
+      description: |
+        Identifies the type of crossing as either a bridge or a tunnel.
+      values:
+        - bridge
+        - tunnel
+  buffer_size: 4
   datasource:
-    geometry_field: geometry
-    key_field: osm_id
-    key_field_as_attribute: no
-    srid: 900913
     query: (SELECT geometry, class, intermittent FROM layer_water(!bbox!, z(!scale_denominator!))) AS t
 schema:
   - ./fountain.sql
