@@ -5,10 +5,10 @@ CREATE OR REPLACE VIEW fountain_z12 AS
 (
 SELECT geometry,
        'fountain'::text AS class,
-       is_intermittent,
+       is_intermittent
 FROM osm_water_polygon
 WHERE osm_water_polygon.tags->'amenity' == 'fountain'
-    );
+);
 
 CREATE OR REPLACE FUNCTION layer_fountain(bbox geometry, zoom_level integer)
     RETURNS TABLE
