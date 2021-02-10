@@ -433,7 +433,7 @@ SELECT geometry,
        is_bridge,
        is_tunnel
 FROM osm_water_polygon
-WHERE "natural" != 'bay' AND osm_water_polygon.tags->'amenity' != 'fountain'
+WHERE "natural" != 'bay' AND COALESCE(osm_water_polygon.tags->'amenity', 'kek') != 'fountain'
     );
 
 -- etldoc: layer_water [shape=record fillcolor=lightpink, style="rounded,filled",

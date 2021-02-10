@@ -7,7 +7,7 @@ SELECT geometry,
        'fountain'::text AS class,
        is_intermittent
 FROM osm_water_polygon
-WHERE osm_water_polygon.tags->'amenity' = 'fountain'
+WHERE COALESCE(osm_water_polygon.tags->'amenity', '') = 'fountain'
 );
 
 CREATE OR REPLACE FUNCTION layer_fountain(bbox geometry, zoom_level integer)
