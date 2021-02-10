@@ -13,7 +13,7 @@ SELECT wp.osm_id,
        is_intermittent
 FROM osm_water_polygon AS wp
          INNER JOIN lake_centerline ll ON wp.osm_id = ll.osm_id
-WHERE wp.name <> '' AND tags->'amenity' <> 'fountain'
+WHERE wp.name <> ''
   AND ST_IsValid(wp.geometry);
 
 -- etldoc:  osm_water_polygon ->  osm_water_lakeline
