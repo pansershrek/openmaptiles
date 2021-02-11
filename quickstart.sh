@@ -259,7 +259,8 @@ make analyze-db
 echo " "
 echo "-------------------------------------------------------------------------------------"
 echo "====> : Testing PostgreSQL tables to match layer definitions metadata"
-make test-perf-null
+#make test-perf-null
+#perf dont support fountain
 
 echo " "
 echo "-------------------------------------------------------------------------------------"
