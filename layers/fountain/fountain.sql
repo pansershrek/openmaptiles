@@ -3,7 +3,7 @@
 
 CREATE OR REPLACE VIEW fountain_z12 AS
 (
-SELECT geometry,
+SELECT name, geometry,
        'fountain'::text AS class,
        is_intermittent
 FROM osm_water_polygon
@@ -15,12 +15,14 @@ CREATE OR REPLACE FUNCTION layer_fountain(bbox geometry, zoom_level integer)
             (
                 geometry     geometry,
                 class        text,
+                name         text,
                 intermittent int
             )
 AS
 $$
 SELECT geometry,
        class::text,
+       name,
        is_intermittent::int AS intermittent
 FROM (
          SELECT *

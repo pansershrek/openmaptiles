@@ -3,16 +3,12 @@ layer:
   description: |
       Fountain
   fields:
+    name: The OSM [`name`](http://wiki.openstreetmap.org/wiki/Key:name) value of the water body.
     class:
       description: |
           Fountain
       values:
-        lake:
-          waterway: ['', 'lake']
-        dock:
-          waterway: 'dock'
-        river:
-        ocean:
+      - fountain
     intermittent:
       description: |
         Mark with `1` if it is an [intermittent](http://wiki.openstreetmap.org/wiki/Key:intermittent) water polygon.
