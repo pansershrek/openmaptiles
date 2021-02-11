@@ -8,7 +8,7 @@ layer:
       description: |
           Fountain
       values:
-      - fountain
+        fountain:
     intermittent:
       description: |
         Mark with `1` if it is an [intermittent](http://wiki.openstreetmap.org/wiki/Key:intermittent) water polygon.
