@@ -1,6 +1,16 @@
 -- etldoc: layer_water_name[shape=record fillcolor=lightpink, style="rounded,filled",
 -- etldoc:     label="layer_water_name | <z0_8> z0_8 | <z9_13> z9_13 | <z14_> z14+" ] ;
 
+CREATE OR REPLACE FUNCTION get_class_of_water_name(tags hstore) RETURNS text AS
+$$
+SELECT CASE
+           WHEN COALESCE(tags->'amenity', '') = 'fountain' THEN 'fountain'
+           ELSE 'lake'
+           END;
+$$ LANGUAGE SQL IMMUTABLE
+                STRICT
+                PARALLEL SAFE;
+
 CREATE OR REPLACE FUNCTION layer_water_name(bbox geometry, zoom_level integer)
     RETURNS TABLE
             (
@@ -27,7 +37,7 @@ SELECT
     COALESCE(NULLIF(name_en, ''), name) AS name_en,
     COALESCE(NULLIF(name_de, ''), name, name_en) AS name_de,
     tags,
-    'lake'::text AS class,
+    get_class_of_water_name(tags) AS class,
     is_intermittent::int AS intermittent
 FROM osm_water_lakeline
 WHERE geometry && bbox
@@ -46,7 +56,7 @@ SELECT
     COALESCE(NULLIF(name_en, ''), name) AS name_en,
     COALESCE(NULLIF(name_de, ''), name, name_en) AS name_de,
     tags,
-    'lake'::text AS class,
+    get_class_of_water_name(tags) AS class,
     is_intermittent::int AS intermittent
 FROM osm_water_point
 WHERE geometry && bbox

@@ -10,9 +10,10 @@ layer:
     name_de: German name `name:de` if available, otherwise `name` or `name:en`.
     class:
       description: |
-          At the moment only `lake` since no ocean parts are labelled. *Reserved for future use*.
+          At the moment only `lake` and 'fountain' since no ocean parts are labelled. *Reserved for future use*.
       values:
-      - lake
+        lake:
+        fountain:
     intermittent:
       description: |
         Mark with `1` if it is an [intermittent](http://wiki.openstreetmap.org/wiki/Key:intermittent) lake.
