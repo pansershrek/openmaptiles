@@ -101,4 +101,6 @@ tables:
       - drain
       - ditch
       - dock
+      water:
+      - pond
     type: polygon

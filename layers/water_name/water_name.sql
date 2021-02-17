@@ -5,7 +5,8 @@ CREATE OR REPLACE FUNCTION get_class_of_water_name(tags hstore) RETURNS text AS
 $$
 SELECT CASE
            WHEN COALESCE(tags->'amenity', '') = 'fountain' THEN 'fountain'
-           WHEN COALESCE(tags->'landuse', '') = 'reservoir' then 'reservoir'
+           WHEN COALESCE(tags->'landuse', '') = 'reservoir' THEN 'reservoir'
+           WHEN COALESCE(tags->'water', '') = 'pond' THEN 'pond'
            ELSE 'lake'
            END;
 $$ LANGUAGE SQL IMMUTABLE
